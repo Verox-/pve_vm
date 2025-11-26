@@ -10,15 +10,46 @@ variable "proxmox_root_password" {
   sensitive   = true
 }
 
-variable "cloud_image_file_id" {
-  description = "File ID of the base image to use"
+variable "proxmox_node_name" {
+  description = "Proxmox node name where VMs will be created"
   type        = string
+  default     = "pve"
+}
+
+variable "cloud_image_file_id" {
+  description = "File ID of the base image to use (optional if cloud_image_name is provided)"
+  type        = string
+  default     = null
+}
+
+variable "cloud_image_name" {
+  description = "Name of pre-existing cloud image file on Proxmox (e.g., 'ubuntu-25.04-cloudimg-amd64.img'). Used when image is pre-downloaded to Proxmox."
+  type        = string
+  default     = null
+}
+
+variable "cloud_image_datastore" {
+  description = "Datastore where the cloud image is located (used with cloud_image_name)"
+  type        = string
+  default     = "local"
 }
 
 variable "vm_name" {
   description = "Name for the VM"
   type        = string
   nullable = false
+}
+
+variable "description" {
+  description = "Description for the VM"
+  type        = string
+  default     = ""
+}
+
+variable "vm_tags" {
+  description = "Tags to apply to the VM"
+  type        = list(string)
+  default     = []
 }
 
 variable "vm_cores" {
