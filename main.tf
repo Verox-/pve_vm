@@ -17,7 +17,7 @@ resource "proxmox_virtual_environment_vm" "vm" {
   # Storage
   disk {
     datastore_id = "local-zfs"
-    file_id      = data.proxmox_virtual_environment_file.cloud_image[0].id
+    file_id      = var.cloud_image_file_id != null ? var.cloud_image_file_id : data.proxmox_virtual_environment_file.cloud_image[0].id
     interface    = "scsi0"
     size         = var.vm_disk_size
   }
