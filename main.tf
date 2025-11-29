@@ -44,10 +44,6 @@ resource "proxmox_virtual_environment_vm" "vm" {
   agent {
     enabled = true
   }
-
-  tpm_state {
-    version = "v2.0"
-  }
   
   # Wait for cloud-init to complete
   operating_system {
