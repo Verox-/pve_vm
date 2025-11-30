@@ -34,13 +34,13 @@ write_files:
       Unattended-Upgrade::Automatic-Reboot "false";
       Unattended-Upgrade::Remove-Unused-Dependencies "true";
       Unattended-Upgrade::Automatic-Reboot-Time "03:00";
-%{ for file in custom_write_files ~}
+%{ for file in custom_write_files }
   - path: ${file.path}
     permissions: '${file.permissions}'
     owner: ${file.owner}
     content: |
-${indent(6, file.content)}
-%{ endfor ~}
+      ${indent(6, file.content)}
+%{ endfor }
 
 # Final system config
 runcmd:
