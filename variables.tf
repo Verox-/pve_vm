@@ -100,3 +100,26 @@ variable "cloud_init_ssh_password_auth" {
   type        = bool
   default     = false
 }
+
+variable "cloud_init_custom_packages" {
+  description = "Additional packages to install via cloud-init"
+  type        = list(string)
+  default     = []
+}
+
+variable "cloud_init_custom_write_files" {
+  description = "Additional files to write via cloud-init (list of maps with path and content keys)"
+  type        = list(object({
+    path    = string
+    content = string
+    permissions = optional(string, "0644")
+    owner   = optional(string, "root:root")
+  }))
+  default     = []
+}
+
+variable "cloud_init_custom_runcmd" {
+  description = "Additional commands to run via cloud-init"
+  type        = list(string)
+  default     = []
+}
